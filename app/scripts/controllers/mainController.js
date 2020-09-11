@@ -198,8 +198,12 @@ angular.module('ethExplorer')
             var currentTXnumber = web3.eth.blockNumber;
             $scope.txNumber = currentTXnumber;
             $scope.recenttransactions = [];
-            for (var i=0; i < 10 && currentTXnumber - i >= 0; i++) {
-              $scope.recenttransactions.push(web3.eth.getTransactionFromBlock(currentTXnumber - i));
+            try {
+              for (var i=0; i < 10 && currentTXnumber - i >= 0; i++) {
+                $scope.recenttransactions.push(web3.eth.getTransactionFromBlock(currentTXnumber - i));
+              }
+            } catch (error) {
+              console.error(error);
             }
         }
 
@@ -207,8 +211,12 @@ angular.module('ethExplorer')
             var currentBlockNumber = web3.eth.blockNumber;
             $scope.blockNumber = currentBlockNumber;
             $scope.blocks = [];
-            for (var i=0; i < 10 && currentBlockNumber - i >= 0; i++) {
-              $scope.blocks.push(web3.eth.getBlock(currentBlockNumber - i));
+            try {
+              for (var i=0; i < 10 && currentBlockNumber - i >= 0; i++) {
+                $scope.blocks.push(web3.eth.getBlock(currentBlockNumber - i));
+              }
+            } catch (error) {
+              console.error(error);
             }
         }
 
